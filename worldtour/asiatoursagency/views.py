@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Tour
 
 def index(request):
-    return HttpResponse("Asia Tours Agency")
+    tours = Tour.objects.all()
+    context = {
+        'tours': tours
+    }
+    return render(request, 'tours/index.html', context)
