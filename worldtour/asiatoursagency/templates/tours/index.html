@@ -1,7 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>Asia Tours</title>
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 <body>
     <h1>Asia Tours Schedual for apr 2025</h1>
@@ -10,5 +13,7 @@
             <li>{{tour}}</li>
         {% endfor %}
     </ul>
+
+    <img src="{% static 'images/logo.png' %}" alt="Asia Tours Logo">
 </body>
 </html>
