@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "asiatoursagency.apps.AsiatoursagencyConfig",
     "products.apps.ProductsConfig",
+    "users.apps.UsersConfig",
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
@@ -92,7 +93,7 @@ WSGI_APPLICATION = "worldtour.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "Postgres",
+        "NAME": "django",
         "USER": "Postgres",
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": "localhost",
@@ -145,3 +146,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "users.CustomUser"

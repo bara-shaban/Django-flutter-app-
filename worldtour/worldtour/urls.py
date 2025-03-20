@@ -23,4 +23,5 @@ urlpatterns = [
     path("", include("asiatoursagency.urls")),
     path("asiaToursAgency/", include("api.urls")),
     path("auth/", include("rest_framework.urls")),
+    path("products/", include("products.urls", namespace="products")),
 ]
