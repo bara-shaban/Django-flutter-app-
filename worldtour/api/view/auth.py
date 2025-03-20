@@ -3,7 +3,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.contrib.auth.models import User
-from ..serializers import UserSerializer
 from django.contrib.auth import authenticate
 
 
@@ -59,11 +58,11 @@ def login_user(request):
         )
 
 
-@api_view(["GET"])
+""" @api_view(["GET"])
 def get_all_users(request):
     users = User.objects.all()
     serilizer = UserSerializer(users, many=True)
-    return JsonResponse({"users": serilizer.data}, status=status.HTTP_200_OK)
+    return JsonResponse({"users": serilizer.data}, status=status.HTTP_200_OK) """
 
 
 @api_view(["DELETE"])

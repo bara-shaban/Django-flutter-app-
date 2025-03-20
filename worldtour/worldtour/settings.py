@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "asiatoursagency.apps.AsiatoursagencyConfig",
-    "user.apps.UserConfig",
+    "products.apps.ProductsConfig",
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
@@ -93,7 +93,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "Postgres",
-        "USER": "postgres",
+        "USER": "Postgres",
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": "localhost",
         "PORT": "5432",
