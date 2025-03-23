@@ -22,6 +22,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("asiatoursagency.urls")),
     path("asiaToursAgency/", include("api.urls")),
-    path("auth/", include("rest_framework.urls")),
+    path("auth/", include("authtokens.urls"), name="auth_token"),
     path("products/", include("products.urls", namespace="products")),
+    path("users/", include("users.urls", namespace="users")),
 ]
