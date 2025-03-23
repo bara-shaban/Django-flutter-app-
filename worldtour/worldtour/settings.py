@@ -101,7 +101,7 @@ DATABASES = {
         "NAME": "django-backend",
         "USER": "django-backend",
         "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": "http://13.61.16.10",
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }
