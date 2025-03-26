@@ -50,3 +50,25 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
         user.set_password(validated_data["password"])
         user.save()
         return user
+
+
+class CustomUserDeleteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CustomUser
+        fields = ["email"]
+
+    def validate(self, attrs):
+        email = attrs["email"]
+        try:
+            user = CustomUser.objects.filter(email=email).first()
+            if not user:
+                raise serializers.ValidationError(
+                    {"email": "User with this email does not exist."}
+                )
+        except:
+            raise serializers.ValidationError(
+                {"email": "User with this email does not exist."}
+            )
+
+        return attrs
