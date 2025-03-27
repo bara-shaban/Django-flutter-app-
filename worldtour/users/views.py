@@ -32,7 +32,6 @@ class CustomUserDelete(generics.DestroyAPIView):
     ]
 
     def destroy(self, request, *args, **kwargs):
-
         email = request.data["email"]
         if not email:
             return Response(
