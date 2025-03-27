@@ -98,8 +98,8 @@ WSGI_APPLICATION = "worldtour.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django-backend",
-        "USER": "django-backend",
+        "NAME": "django",
+        "USER": "Postgres",
         "PASSWORD": os.getenv("DB_PASSWORD"),
         "HOST": "localhost",
         "PORT": "5432",

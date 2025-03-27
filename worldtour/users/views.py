@@ -32,14 +32,6 @@ class CustomUserDelete(generics.DestroyAPIView):
     ]
 
     def destroy(self, request, *args, **kwargs):
-        print("Request data:", request.data)
-        print("Request user:", request.user)
-        print("Authenticated:", request.user.is_authenticated)
-        print("Request method:", request.method)
-        print(
-            "Permissions:",
-            [perm.__class__.__name__ for perm in self.permission_classes],
-        )
 
         email = request.data["email"]
         if not email:
@@ -49,10 +41,10 @@ class CustomUserDelete(generics.DestroyAPIView):
         serializer = CustomUserDeleteSerializer(data={"email": email})
 
         try:
-            is_valid = serializer.is_valid()
-            print("serializer is valid:", is_valid)
-
-            print("serializer errors:", serializer.errors)
+            is_valid = serializer.is_valid(raise_exception=True)
+            if is_valid:
+                user = get_user_model().objects.get(email=email)
+                user.delete()
 
             return Response(
                 status=status.HTTP_204_NO_CONTENT,

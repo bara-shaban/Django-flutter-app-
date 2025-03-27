@@ -1,6 +1,7 @@
 from rest_framework import serializers, validators
 from .models import CustomUser
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth import get_user_model
 
 
 class CustomUserRegistrationSerializer(serializers.ModelSerializer):
@@ -8,7 +9,7 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
         required=True,
         validators=[
             validators.UniqueValidator(
-                queryset=CustomUser.objects.all(),
+                queryset=get_user_model().objects.all(),
             ),
         ],
     )
@@ -29,7 +30,7 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        model = CustomUser
+        model = get_user_model()
         fields = (
             "email",
             "password",
@@ -44,7 +45,7 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        user = CustomUser.objects.create(
+        user = get_user_model().objects.create(
             email=validated_data["email"],
         )
         user.set_password(validated_data["password"])
@@ -53,22 +54,19 @@ class CustomUserRegistrationSerializer(serializers.ModelSerializer):
 
 
 class CustomUserDeleteSerializer(serializers.ModelSerializer):
-
     class Meta:
-        model = CustomUser
+        model = get_user_model()
         fields = ["email"]
+        extra_kwargs = {
+            "email": {
+                "validators": [],
+            },
+        }
 
     def validate(self, attrs):
         email = attrs["email"]
-        try:
-            user = CustomUser.objects.filter(email=email).first()
-            if not user:
-                raise serializers.ValidationError(
-                    {"email": "User with this email does not exist."}
-                )
-        except:
+        if not get_user_model().objects.filter(email=email).exists():
             raise serializers.ValidationError(
                 {"email": "User with this email does not exist."}
             )
-
         return attrs
