@@ -25,4 +25,5 @@ urlpatterns = [
     path("auth/", include("authtokens.urls"), name="auth_token"),
     path("products/", include("products.urls", namespace="products")),
     path("users/", include("users.urls", namespace="users")),
+    path("webFrontEnd/", include("webFrontEnd.urls", namespace="webFrontEnd")),
 ]

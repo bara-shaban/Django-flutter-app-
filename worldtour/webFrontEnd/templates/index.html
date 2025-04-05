@@ -1,0 +1,26 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home - My Blog{% endblock %}
+
+{% block content %}
+<section class="intro">
+    <img src="{% static 'images/logo.png' %}" alt="Your photo" class="profile-photo">
+    <h2>Hello, I'm a Backend Developer</h2>
+    <p>Welcome to my blog. I share my journey, projects, and experiences with Django and backend development.</p>
+</section>
+
+<section class="latest-posts">
+    <h3>Latest Blog Posts</h3>
+    <ul>
+        <li>
+            <h4><a href="{% url 'webFrontEnd:post1' %}">How I built my first API</a></h4>
+            <p>A short journey into the backend world...</p>
+        </li>
+        <li>
+            <h4><a href="{% url 'webFrontEnd:post2' %}">Deploying to AWS EC2</a></h4>
+            <p>Step-by-step notes from my deployment experience.</p>
+        </li>
+    </ul>
+</section>
+{% endblock %}

@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from .serializers import CustomUserRegistrationSerializer, CustomUserDeleteSerializer
 from rest_framework import permissions, status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
 class CustomUserRegister(generics.CreateAPIView):
@@ -53,3 +55,18 @@ class CustomUserDelete(generics.DestroyAPIView):
             return Response(
                 status=status.HTTP_400_BAD_REQUEST,
             )
+
+
+class GetCustomUser(generics.RetrieveAPIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        return Response(
+            {
+                "email": user.email,
+                "is_staff": user.is_staff,
+                "is_superuser": user.is_superuser,
+            }
+        )
